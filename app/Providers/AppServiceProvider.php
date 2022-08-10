@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Only allows numerical values to be passed
+        //Route::pattern('blog_id', '[0-9]+');
     }
 }

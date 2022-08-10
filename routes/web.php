@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\BlogsController;
+use \App\Models\Blog;
+use \App\Models\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +19,11 @@ Route::get('/', function() {
     return view('welcome');
 });
 
-Route::get('/posts', [BlogsController::class, 'index']);
+Route::controller(BlogsController::class)->group(function () {
+    Route::get('/blogs', 'index');
+    Route::get('/blogs/{blog_id}', 'getBlog');
+});
 
-Route::get('/posts/{blog_id}', function($blog_id) {
-
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/admin', 'login');
 });

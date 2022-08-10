@@ -7,12 +7,24 @@
         <title> {{config('app.name', 'Blog Page')}} </title>
     </head>
     <body>
+        <div class="justify-center items-center flex py-32 h-screen">
+            <div class="w-1/2 text-center justify-center items-center flex flex-wrap">
+                <h1 class="p-6 font-bold text-7xl"> My
+                    <strong class="text-amber-300"> Blog Page </strong>
+                </h1>
 
-        <h1 class="bg-red-100"> My Blog Page </h1>
-        <p> This project was undertaken to implement our newly established knowledge in
-            DataBase design and configuration with Laravel and SQL. This site also
-            implements Tailwind CSS to spice things up
-        </p>
-        <button> <a href="/blogs"> Go to Blogs </a> </button>
+                <p class="font-medium my-4 pb-4 px-32"> This project was undertaken to implement our newly established knowledge in
+                    SQL Database design integrated with Laravel. As well as implementing
+                    routes to easily navigate to different areas of the project. This site also
+                    integrates Tailwind to <strong class="text-red-600"> spice </strong> things up
+                </p>
+
+                <button class="bg-blue-700 text-white text-xl p-3 rounded-3xl">
+                    <a class="" href="/blogs"> My Blogs </a>
+                </button>
+            </div>
+        </div>
+
+
     </body>
 </html>

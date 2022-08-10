@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use \App\Models\Blog;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,11 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Blog::factory(10)->create();
+        $blogs = Blog::all();
+        foreach($blogs as $blog) {
+            for ($i = 0; $i < 10; $i++) {
+                \App\Models\Comment::factory()->create([
+                    'blog_id' => $blog->id
+                ]);
+            }
+        }
     }
 }
