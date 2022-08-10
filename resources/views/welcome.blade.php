@@ -20,7 +20,7 @@
                 </p>
 
                 <button class="bg-blue-700 text-white text-xl p-3 rounded-3xl">
-                    <a class="" href="/blogs"> My Blogs </a>
+                    <a class="" href="{{route('blogs.index')}}"> My Blogs </a>
                 </button>
             </div>
         </div>

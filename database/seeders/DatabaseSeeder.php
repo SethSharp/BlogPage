@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         Blog::factory(10)->create();
         $blogs = Blog::all();
         foreach($blogs as $blog) {
-            for ($i = 0; $i < 10; $i++) {
+            $x = rand(1,10);
+            for ($i = 0; $i < $x; $i++) {
                 \App\Models\Comment::factory()->create([
                     'blog_id' => $blog->id
                 ]);
