@@ -9,7 +9,8 @@ use \App\Models\Comment;
 class BlogsController extends Controller
 {
     public function index() {
-        $blogs = Blog::all();
+        //$blogs = Blog::all();
+        $blogs = Blog::orderBy('created_at', 'ASC')->get();
         return view('blogs.index', [
             'blogs' => $blogs
         ]);
