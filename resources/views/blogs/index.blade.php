@@ -22,7 +22,7 @@
 
                         <p> {{ substr($blog->body,0,50)  }}... </p>
                         <button class="bg-blue-700 text-white text-xl p-2 mt-3 rounded-2xl">
-                            <a href="/blogs/{{$blog->id}}}">
+                            <a href="{{route('blogs.get', $blog->id)}}">
                                 View
                             </a>
                         </button>

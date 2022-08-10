@@ -24,4 +24,8 @@ class BlogsController extends Controller
             'comments' => $comments
         ]);
     }
+
+    public function comments() {
+        return view('blogs.comment');
+    }
 }

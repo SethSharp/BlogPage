@@ -15,7 +15,7 @@ class BlogFactory extends Factory
     {
         return [
             'title' => fake()->jobTitle(),
-            'body' => fake()->text(200),
+            'body' => fake()->text(500),
         ];
     }
 }
