@@ -9,6 +9,8 @@
 <body>
     <h1> Title: {{$title}} </h1>
     <p> {{$body}} </p>
+
+
     {{-- Good place for a component when we come to it --}}
     <ul>
         @foreach($comments as $comment)
