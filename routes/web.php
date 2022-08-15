@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\BlogsController;
 use \App\Models\AdminController;
+use \App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,11 +20,29 @@ Route::get('/', function() {
 });
 
 Route::controller(BlogsController::class)->group(function () {
-    Route::get('/blogs', 'index')->name('blogs.index');
-    Route::get('/blogs/{blog_id}', 'getBlog')->name('blogs.get');
+    Route::get('/blogs/get/{blog_id}', 'get')->name('blogs.get');
+    Route::get('/blogs/create', 'createPage')->name('blogs.create');
+    Route::get('/blogs/update/{blog_id}', 'updatePage')->name('blogs.updatePage');
     Route::get('/blogs/{blog_id}/comments', 'comments')->name('blog.comment');
+
+    // CRUD
+    Route::post('/blogs/create', [BlogsController::class, 'create']);
+    Route::get('/blogs', 'index')->name('blogs.index');
+    Route::put('/blogs/{blog}', [BlogsController::class, 'update']);
+    Route::delete('/blogs/{blog}', [BlogsController::class, 'delete']);
+});
+
+Route::controller(CommentController::class)->group(function () {
+    Route::get('/comments/create/{blog_id}', [CommentController::class, 'createPage']);
+    Route::post('/comments/create/{blog_id}', [CommentController::class, 'create']);
+
+    Route::get('/comments/{comment_id}', [CommentController::class, 'updatePage']);
+    Route::put('/comments/{comment}', [CommentController::class, 'update']);
+    Route::delete('/comments/{comment}', [CommentController::class, 'delete']);
 });
 
 Route::controller(AdminController::class)->group(function () {
-    Route::get('/admin', 'login')->name('adming.login');
+    Route::get('/admin', 'login')->name('admin.login');
 });
+
+
