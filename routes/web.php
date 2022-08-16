@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\BlogsController;
-use \App\Models\AdminController;
+use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ use \App\Http\Controllers\CommentController;
 */
 
 Route::get('/', function() {
-    return view('welcome');
+    return view('users.registration');
 });
 
 Route::controller(BlogsController::class)->group(function () {
@@ -41,8 +41,6 @@ Route::controller(CommentController::class)->group(function () {
     Route::delete('/comments/{comment}', [CommentController::class, 'delete']);
 });
 
-Route::controller(AdminController::class)->group(function () {
-    Route::get('/admin', 'login')->name('admin.login');
+Route::controller(UserController::class)->group(function () {
+    Route::post('/register', 'register')->name('user.register');
 });
-
-
