@@ -11,6 +11,7 @@
         <h1 class="py-5 font-bold text-7xl">
             {{$blog->title}}
         </h1>
+        <h2> User: {{$blog->getUser($blog->user_id)}} </h2>
         <p class="py-12"> {{$blog->body}} </p>
         <a href="/blogs/update/{{$blog->id}}" class="bg-blue-500 text-white tracking-wide px-6 py-2 inline-block mb-6 shadow-lg rounded hover:shadow">
             Update
@@ -29,18 +30,13 @@
         <ul class="">
             @foreach($comments as $comment)
                 <li>
-                    <div class="border-gray-700 border-2 rounded-3xl bg-gray-50
-                                p-5 my-4">
+                    <div class="border-gray-700 border-2 rounded-3xl bg-gray-50 p-5 my-4">
                         <a href="/comments/{{$comment->id}}">
                             <p>
                                 {{$comment->comment}}
                             </p>
                         </a>
-
-
-
                     </div>
-
                 </li>
             @endforeach
         </ul>
