@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    @vite('resources/css/app.css')
-    <title> {{config('app.name', 'Blog Page')}} </title>
-</head>
-<body>
+@extends('layouts.app')
+@section('content')
 
 <div style="width: 900px;" class="max-w-full mx-auto pt-4">
-    <form method="POST" action="/blogs/create">
+    @if(\Illuminate\Support\Facades\Auth::user())
+        <p> AUTHENTICATED </p>
+    @endif
+    <form method="POST" action="/blogs/create/{{\Illuminate\Support\Facades\Auth::user()->id}}">
         @method('POST')
         @csrf
         <div class="mb-4">
@@ -30,5 +26,3 @@
     </form>
 
 </div>
-</body>
-</html>

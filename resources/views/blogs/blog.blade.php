@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    @vite('resources/css/app.css')
-    <title> {{config('app.name', 'Blog Page')}} </title>
-</head>
-<body>
+@extends('layouts.app')
+
+@if(\Illuminate\Support\Facades\Auth::user())
+    @section('content')
     <div class="px-32">
         <h1 class="py-5 font-bold text-7xl">
             {{$blog->title}}
         </h1>
         <h2> User: {{$blog->getUser($blog->user_id)}} </h2>
         <p class="py-12"> {{$blog->body}} </p>
-        <a href="/blogs/update/{{$blog->id}}" class="bg-blue-500 text-white tracking-wide px-6 py-2 inline-block mb-6 shadow-lg rounded hover:shadow">
-            Update
-        </a>
+        @if(\Illuminate\Support\Facades\Auth::user()->id == $blog->user_id)
+            <a href="/blogs/update/{{$blog->id}}" class="bg-blue-500 text-white tracking-wide px-6 py-2 inline-block mb-6 shadow-lg rounded hover:shadow">
+                Update
+            </a>
+        @endif
+
     </div>
 
 
@@ -31,7 +29,12 @@
             @foreach($comments as $comment)
                 <li>
                     <div class="border-gray-700 border-2 rounded-3xl bg-gray-50 p-5 my-4">
-                        <a href="/comments/{{$comment->id}}">
+                        <a
+                            @if(\Illuminate\Support\Facades\Auth::user()->id == $comment->user_id)
+                                href="/comments/{{$comment->id}}"
+                            @endif
+                                href=""
+                            >
                             <p>
                                 {{$comment->comment}}
                             </p>
@@ -41,5 +44,5 @@
             @endforeach
         </ul>
     </div>
-</body>
-</html>
+    @stop
+@endif

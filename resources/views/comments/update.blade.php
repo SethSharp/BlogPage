@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    @vite('resources/css/app.css')
-    <title> {{config('app.name', 'Blog Page')}} </title>
-</head>
-<body>
+@extends('layouts.app')
 
+@section('content')
+{{--{{dd($comment)}}--}}
 <div style="width: 900px;" class="max-w-full mx-auto pt-4">
     <form method="POST" action="/comments/{{$comment->id}}">
         @method('PUT')
@@ -32,5 +26,4 @@
         </button>
     </form>
 </div>
-</body>
-</html>
+@stop

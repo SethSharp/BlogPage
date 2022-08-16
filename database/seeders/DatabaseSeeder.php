@@ -18,13 +18,14 @@ class DatabaseSeeder extends Seeder
     {
 
         $first = User::factory()->create([
-            'name' => 'James'
+            'name' => 'James',
+            'role' => 'admin'
         ]);
         Blog::factory(4)->create([
             'user_id' => $first->id
         ]);
         $second = User::factory()->create([
-            'name' => 'Glyb'
+            'name' => 'Glyb',
         ]);
         Blog::factory(4)->create([
             'user_id' => $second->id

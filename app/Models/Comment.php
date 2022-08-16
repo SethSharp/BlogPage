@@ -9,8 +9,11 @@ class Comment extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['blog_id', 'comment'];
+    protected $fillable = ['blog_id', 'user_id', 'comment'];
     public function blog() {
         return $this->hasOne(Blog::class);
+    }
+    public function user() {
+        return $this->hasOne(User::class);
     }
 }
