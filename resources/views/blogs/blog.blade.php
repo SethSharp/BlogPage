@@ -16,7 +16,6 @@
 
     </div>
 
-
     {{-- Good place for a component when we come to it --}}
     <div class="bg-gray-200 px-32 py-6">
         <h1 class="py-5 font-bold text-3xl">

@@ -1,38 +1,30 @@
 @extends('layouts.app')
 
-
-@if(\Illuminate\Support\Facades\Auth::user())
-    @section('content')
-        <div class="justify-center items-center text-center h-screen">
-            <div class="text-center justify-center items-center">
-                <h1 class="p-6 font-bold text-7xl">
-                    Blogs
-                </h1>
-            </div>
-            <div class="justify-center flex flex-wrap mt-4 mx-auto">
-                @foreach($blogs as $blog)
-                    <div class="bg-gray-200 p-4 border-black border-2
-                                w-52 w-52
-                                mx-8 my-4">
-                        <h2 class="text-2xl"> {{ $blog->title }} </h2>
-
-                        <p> {{ substr($blog->body,0,50)  }}... </p>
-                        <button class="bg-blue-700 text-white text-xl p-2 mt-3 rounded-2xl">
-                            <a href="{{route('blogs.get', $blog->id)}}">
-                                View
-                            </a>
-                        </button>
-                    </div>
-                @endforeach
-            </div>
-            <a href="/blogs/create" class="mt-20 bg-green-500 text-white tracking-wide px-6 py-2 inline-block mb-6 shadow-lg rounded hover:shadow">
-                Create
-            </a>
-        </div>
-    @stop
-@endif
 @section('content')
-    <div>
-        <p> Login to view blogs </p>
+    <div class="justify-center items-center text-center h-screen">
+        <div class="text-center justify-center items-center">
+            <h1 class="p-6 font-bold text-7xl">
+                Blogs
+            </h1>
+        </div>
+        <div class="justify-center flex flex-wrap mt-4 mx-auto">
+
+            @include('components.blog-card', ['blogs'=>$blogs]);
+
+        </div>
+        <a class="mt-20 bg-green-500 text-white tracking-wide px-6 py-2 inline-block mb-6 shadow-lg rounded hover:shadow"
+           href="
+                @if (\Illuminate\Support\Facades\Auth::user())
+                    /blogs/create
+                @else
+                    /login
+                @endif
+                ">
+            @if (\Illuminate\Support\Facades\Auth::user())
+                Post
+            @else
+                Login to post
+            @endif
+        </a>
     </div>
 @stop
