@@ -39,12 +39,13 @@ class BlogsController extends Controller
 
 
     // CRUD operations: create, retrieve, update, delete
-    public function create() {
+    public function create($user_id) {
         request()->validate([
             'title' => 'required',
             'body' => 'required',
         ]);
         Blog::create([
+            'user_id' => $user_id,
             'title' => request('title'),
             'body' => request('body')
         ]);

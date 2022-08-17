@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
+use \Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -14,18 +15,21 @@ class CommentController extends Controller
             'blog_id' => $blog_id
         ]);
     }
+
     public function updatePage($comment_id) {
         $comment = Comment::find($comment_id);
         return view('comments.update', [
             'comment' => $comment
         ]);
     }
+
     //CRUD
     public function create($blog_id) {
         request()->validate([
             'comment' => 'required',
         ]);
         Comment::create([
+            'user_id' => Auth::user()->id,
             'blog_id' => $blog_id,
             'comment' => request('comment')
         ]);
@@ -40,7 +44,7 @@ class CommentController extends Controller
         ]);
         return redirect()->route('blogs.index');
     }
-    public function delete($comment) {
+    public function delete(Comment $comment) {
         $comment->delete();
         return redirect()->route('blogs.index');
     }

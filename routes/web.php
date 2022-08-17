@@ -16,7 +16,7 @@ use \App\Http\Controllers\CommentController;
 */
 
 Route::get('/', function() {
-    return view('users.registration');
+    return view('auth.login');
 });
 
 Route::controller(BlogsController::class)->group(function () {
@@ -26,21 +26,27 @@ Route::controller(BlogsController::class)->group(function () {
     Route::get('/blogs/{blog_id}/comments', 'comments')->name('blog.comment');
 
     // CRUD
-    Route::post('/blogs/create', [BlogsController::class, 'create']);
+    Route::post('/blogs/create/{user_id}', 'create');
     Route::get('/blogs', 'index')->name('blogs.index');
-    Route::put('/blogs/{blog}', [BlogsController::class, 'update']);
-    Route::delete('/blogs/{blog}', [BlogsController::class, 'delete']);
+    Route::put('/blogs/{blog}', 'update');
+    Route::delete('/blogs/{blog}', 'delete');
 });
 
 Route::controller(CommentController::class)->group(function () {
-    Route::get('/comments/create/{blog_id}', [CommentController::class, 'createPage']);
-    Route::post('/comments/create/{blog_id}', [CommentController::class, 'create']);
+    Route::get('/comments/create/{blog_id}', 'createPage');
+    Route::post('/comments/create/{blog_id}', 'create');
 
-    Route::get('/comments/{comment_id}', [CommentController::class, 'updatePage']);
-    Route::put('/comments/{comment}', [CommentController::class, 'update']);
-    Route::delete('/comments/{comment}', [CommentController::class, 'delete']);
+    Route::get('/comments/{comment_id}', 'updatePage');
+    Route::put('/comments/{comment}', 'update');
+    Route::delete('/comments/{comment}', 'delete');
 });
 
 Route::controller(UserController::class)->group(function () {
     Route::post('/register', 'register')->name('user.register');
 });
+
+Auth::routes();
+
+Route::get('/logout', [\App\Http\Controllers\Auth\LogoutController::class, 'perform']);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
